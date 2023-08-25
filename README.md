@@ -1,5 +1,8 @@
 # Doggos
-[!doggo](img/doggo.png)
+![doggo](img/doggo.png)
+(image credit to 
+Janek Holoubek from unsplash)
+
 Doggos is a simple filtering project that allows users to select or search dog breeds, and then click on that breed to see an image of that dog breed.
 
 
