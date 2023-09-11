@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         .then(res => res.json())
         .then(data => {
             dogBreeds = Object.keys(data.message); 
-            console.log(Object.keys(data.message));
             
             dogBreeds.forEach(breedName => {
                 let breedItem = document.createElement('li');
@@ -107,7 +106,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 function handleImageDisplay(e) {
                     e.preventDefault();
-                    console.log(breedName);
                     displayImageModal(breedName);
                 }
             });
@@ -138,6 +136,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         modal.innerHTML = 
             `<div class="modal-content">
                 <a href="javascript:;" class="close-modal" tabindex="0">Close</a>
+                <h3>${breedName}</h3>
                 <img src="" alt="${breedName}" id="modal-image">
             </div>`
         ;
