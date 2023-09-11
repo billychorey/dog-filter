@@ -1,35 +1,120 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     let contentList = document.getElementById('contentList');
+    let infoContainer = document.getElementById('more-info');
     let fetchUrl = 'https://dog.ceo/api/breeds/list/all';
+    let fetchDogInfo = 'https://dogapi.dog/api/v2/breeds';
+    let dogFacts = []
     let dogBreeds = [];
     const breedInput = document.getElementById('input');
 
+  
+    function dogInformation() {
+        fetch(fetchDogInfo)
+        .then(res => res.json())
+        .then(data => {
+           
+            dogFacts = data.data;
+
+            const breedSelect = document.createElement('select');
+            const placeholderOption = document.createElement('option');
+            placeholderOption.textContent = 'Select a breed for more information.';
+            breedSelect.appendChild(placeholderOption);
+
+            let breedName;
+            let description;
+            let hypoallergenic;
+
+            dogFacts.forEach(dogFact => {
+                breedName = dogFact.attributes.name;
+                description = dogFact.attributes.description;
+                hypoallergenic = dogFact.attributes.hypoallergenic;
+
+              
+
+                const option = document.createElement('option');
+                option.value = breedName;
+                option.textContent = breedName;
+                breedSelect.appendChild(option);
+
+            });
+
+            infoContainer.appendChild(breedSelect);
+
+            breedSelect.addEventListener('change', handleInfoSelect);
+
+            function handleInfoSelect() {
+                const selectedOption = breedSelect.options[breedSelect.selectedIndex];
+                const selectedBreed = selectedOption.value;
+            
+                const selectedDogFact = dogFacts.find(dogFact => dogFact.attributes.name === selectedBreed);
+            
+                if (selectedDogFact) {
+                    breedName = selectedDogFact.attributes.name;
+                    description = selectedDogFact.attributes.description;
+                    hypoallergenic = selectedDogFact.attributes.hypoallergenic;
+            
+                    let hypoallergenicText;
+            
+                    if (hypoallergenic) {
+                        hypoallergenicText = 'is';
+                    } else {
+                        hypoallergenicText = 'is not';
+                    }
+            
+                    let additionalInformation = document.createElement('div');
+                    additionalInformation.innerHTML =
+                        `
+                             <a href="javascript:;" id="close-info" tabindex="0">Close</a>
+                             <p>${description}</p>
+                             <p>The ${breedName} ${hypoallergenicText} hypoallergenic.</p>
+                         `;
+            
+                    infoContainer.innerHTML = '';
+            
+                    infoContainer.appendChild(additionalInformation);
+                    
+                    let closeButton = document.getElementById('close-info');
+                    closeButton.addEventListener('click', () => {
+                        infoContainer.removeChild(additionalInformation);
+                        infoContainer.appendChild(breedSelect);
+                    });
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    }
+    dogInformation();
+    
     function populateBreedList() {
         fetch(fetchUrl)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                dogBreeds = Object.keys(data.message); 
+        .then(res => res.json())
+        .then(data => {
+            dogBreeds = Object.keys(data.message); 
+            console.log(Object.keys(data.message));
+            
+            dogBreeds.forEach(breedName => {
+                let breedItem = document.createElement('li');
+                let breedLink = document.createElement('a');
+                breedLink.href = "javascript:;";
+                breedLink.textContent = breedName;
+                breedItem.id = breedName.toLowerCase();
+                contentList.appendChild(breedItem); 
+                breedItem.appendChild(breedLink);
 
-               
-                dogBreeds.forEach(breedName => {
-                    let breedItem = document.createElement('li');
-                    let breedLink = document.createElement('a');
-                    breedLink.href = "javascript:;";
-                    breedLink.textContent = breedName;
-                    breedItem.id = breedName.toLowerCase();
-                    contentList.appendChild(breedItem); 
-                    breedItem.appendChild(breedLink);
+                breedLink.addEventListener('click', handleImageDisplay);
 
-                    breedLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        displayImageModal(breedName);
-                    });
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+                function handleImageDisplay(e) {
+                    e.preventDefault();
+                    console.log(breedName);
+                    displayImageModal(breedName);
+                }
             });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
     }
     populateBreedList();
 

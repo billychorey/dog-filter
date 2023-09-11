@@ -66,7 +66,7 @@ legend {
     border: 1px solid lightgray;
 }
 
-.close-modal {
+.close-modal, #close-info {
     display: inline-block;
     margin-bottom: .5rem;
     color: black;
@@ -98,6 +98,17 @@ legend {
 
 #backToTop:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
- transition-timing-function: ease-in-out;
-  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+#more-info {
+    float: right;
+    width: 300px;
+    padding-right: 16px;
+}
+
+form, ul {
+    width: calc(100% - 318px);
+    float: left;
 }
