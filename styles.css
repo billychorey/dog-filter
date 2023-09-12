@@ -5,6 +5,30 @@ body {
     background: rgb(241, 243, 244);
 }
 
+h1 {
+    margin-left: 2rem;
+}
+
+.flex-wrap {
+    display: flex;
+    padding: 0 2rem;
+}
+
+.left{
+    margin-right: 2rem;
+}
+
+.right h3 {
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+
+.right p {
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
 .userInputs {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
@@ -37,6 +61,7 @@ ul a {
 legend {
     font-weight: bold;
     margin-bottom: 1rem;
+    font-size: 1rem;
 }
 
 .modal {
@@ -102,24 +127,4 @@ legend {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     transition-timing-function: ease-in-out;
     transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-}
-
-.right {
-    float: right;
-    width: 300px;
-    padding-right: 16px;
-}
-
-.right p {
-    font-size: .875rem;
-    line-height: 1.5;
-}
-
-.maincontent {
-    width: 300px;
-    float: left;
-}
-
-h3 {
-    margin-top: 0;
 }
