@@ -3,7 +3,7 @@
 (image credit to 
 Janek Holoubek from unsplash)
 
-Doggos is a simple filtering project that allows users to select or search dog breeds, and then click on that breed to see an image of that dog breed.
+Doggos is a simple filtering project that allows users to select or search dog breeds, and then click on that breed to see an image of that dog breed. There is also a selection where a user can select a dog breed from a dropdown and get more information about that breed.
 
 
 
